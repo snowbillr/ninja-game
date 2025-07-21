@@ -2,9 +2,13 @@
 
 This project is a 2D platformer built with Godot 4.
 
+When beginning a task, always read @project.godot to understand the project's settings and input map.
+
 ## Core Mechanics
 
 The primary focus of the game is on fluid player movement and engaging combat.
+
+### Input Map
 
 ## Development Stage
 
