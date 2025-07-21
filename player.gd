@@ -18,13 +18,13 @@ func _ready() -> void:
 	state_machine = state.IDLE
 
 func _physics_process(delta: float) -> void:
-	var x_input = Input.get_axis("ui_left", "ui_right")
+	var x_input = Input.get_axis("move_left", "move_right")
 
 	match state_machine:
 		state.IDLE:
 			animation_player.play("idle")
 			
-			if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			if Input.is_action_just_pressed("jump") and is_on_floor():
 				velocity.y = -jump_force
 				state_machine = state.JUMPING
 			elif x_input != 0:
@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		state.RUNNING:
 			animation_player.play("run")
 		
-			if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			if Input.is_action_just_pressed("jump") and is_on_floor():
 				velocity.y = -jump_force
 				state_machine = state.JUMPING
 			elif not is_on_floor():
