@@ -21,8 +21,6 @@ func _exit():
 
 func _on_timer_timeout():
 	if not self.player.is_on_floor():
-		self.gsm.transition("fall")
-	elif Input.get_axis("move_left", "move_right") != 0:
-		self.gsm.transition("run")
+		self.gsm.transition("air", { "do_jump": false })
 	else:
-		self.gsm.transition("idle")
+		self.gsm.transition("ground")
