@@ -9,7 +9,8 @@ var state: GSMState = null
 func _ready():
 	self.state = init_state
 	
-	self.state._enter({})
+func start(args: Dictionary = {}):
+	self.state._enter(args)
 	self.state.process_mode = Node.PROCESS_MODE_INHERIT
 
 func transition(to: String, args: Dictionary = {}):

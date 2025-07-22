@@ -2,8 +2,7 @@ class_name GSMState
 extends Node
 
 @onready var gsm: GSM = $".."
-
-#var actor: Node = null
+@onready var actor: Node = gsm.actor
 
 func _ready():
 	self.process_mode = Node.PROCESS_MODE_DISABLED
