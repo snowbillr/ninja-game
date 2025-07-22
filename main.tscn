@@ -215,7 +215,7 @@ action_state = 0
 metadata/_custom_type_script = "uid://cey6mrsr07fa0"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
-size = Vector2(551, 16)
+size = Vector2(442.5, 16)
 
 [node name="World" type="Node2D"]
 
@@ -337,14 +337,29 @@ position = Vector2(-247, 130)
 texture = ExtResource("4_1bvp3")
 
 [node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(321, 66)
+position = Vector2(249, 86)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(-84, 92)
+position = Vector2(-138.25, 92)
 shape = SubResource("RectangleShape2D_0xm2m")
 
 [node name="Polygon2D" type="Polygon2D" parent="Floor"]
 position = Vector2(-361, 84)
-scale = Vector2(5.53, 0.16)
+scale = Vector2(4.45, 0.16)
+color = Color(0.125911, 0.125911, 0.125911, 1)
+polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
+
+[node name="Floor2" type="StaticBody2D" parent="."]
+position = Vector2(475, 135)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2(-138.25, 92)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Polygon2D" type="Polygon2D" parent="Floor2"]
+position = Vector2(-361, 84)
+scale = Vector2(4.45, 0.16)
 color = Color(0.125911, 0.125911, 0.125911, 1)
 polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)

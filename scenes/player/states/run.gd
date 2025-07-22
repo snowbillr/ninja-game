@@ -14,3 +14,9 @@ func _physics_process(_delta: float) -> void:
 		self.player.player_stats.acceleration_coefficient)
 	
 	self.player.move_and_slide()
+
+func _transition() -> Variant:
+	if not self.player.is_on_floor():
+		return "fall"
+	
+	return null
