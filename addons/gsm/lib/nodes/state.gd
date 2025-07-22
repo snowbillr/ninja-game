@@ -5,17 +5,21 @@ extends Node
 
 @onready var gsm: GSM = $".."
 
+## Lifecycle
+
 func _ready():
 	self.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _enter(args: Dictionary) -> void:
 	pass
 	
-func _transition() -> Variant:
-	return null
-	
 func _exit() -> void:
 	pass
+
+## Transition Handling
+
+func _transition() -> Variant:
+	return null
 
 func _unhandled_input(event: InputEvent) -> void:
 	for transition in transitions:
