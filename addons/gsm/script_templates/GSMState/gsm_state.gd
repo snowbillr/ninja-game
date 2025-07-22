@@ -1,17 +1,21 @@
+# This is a template for a GSMState.
+# It provides the basic structure for a state in the Godot State Machine.
 extends GSMState
 
 
-func _ready():
-	super()
-
-# Called when a state is entered
+# Called by the state machine when this state becomes active.
+# `args` is an optional dictionary passed from the `gsm.transition()` call.
 func _enter(args: Dictionary) -> void:
 	pass
 
-# Called when a state is exited	
+
+# Called by the state machine when this state is exited.
+# Use this for cleanup logic.
 func _exit() -> void:
 	pass
 
-# TBD
-func _check_transitions():
-	pass
+
+# Called on every `_process` frame while the state is active.
+# Return the name of another state to transition to it, or `null` to stay in the current state.
+func _transition() -> Variant:
+	return null
