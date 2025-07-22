@@ -15,13 +15,3 @@ func _physics_process(_delta: float) -> void:
 		self.player.player_stats.acceleration_coefficient)
 	
 	self.player.move_and_slide()
-
-func _process(_delta: float) -> void:
-	var x_input = Input.get_axis("move_left", "move_right")
-	
-	if Input.is_action_just_pressed("dash"):
-		self.gsm.transition("dash")
-	elif Input.is_action_just_pressed("jump") and self.player.is_on_floor():
-		self.gsm.transition("jump")
-	elif x_input == 0:
-		self.gsm.transition("idle")

@@ -1,11 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://c3n6ewvf7evxl"]
+[gd_scene load_steps=32 format=3 uid="uid://c3n6ewvf7evxl"]
 
 [ext_resource type="Script" uid="uid://5s6qntus85as" path="res://scenes/player/player.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://scenes/player/resources/player_stats.gd" id="2_272bh"]
-[ext_resource type="Script" uid="uid://11pw4o48jd15" path="res://addons/gsm/lib/gsm.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://11pw4o48jd15" path="res://addons/gsm/lib/nodes/gsm.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://6jg01rlgdf7g" path="res://assets/player.png" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://cm5akp6xeg5ww" path="res://scenes/player/states/idle.gd" id="4_kek77"]
 [ext_resource type="Script" uid="uid://ds5sn6j5r6s2k" path="res://scenes/player/states/run.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://cey6mrsr07fa0" path="res://addons/gsm/lib/resources/input_transition.gd" id="6_4c57u"]
 [ext_resource type="Script" uid="uid://cwp28viqgtto6" path="res://scenes/player/states/jump.gd" id="6_efxa6"]
 [ext_resource type="Script" uid="uid://bwe28qhcv5d4f" path="res://scenes/player/states/fall.gd" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://3ubtivihfehp" path="res://scenes/player/states/dash.gd" id="9_kek77"]
@@ -136,6 +137,83 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(22, 30)
 
+[sub_resource type="Resource" id="Resource_efxa6"]
+script = ExtResource("6_4c57u")
+to = "dash"
+input_action = "dash"
+action_state = 0
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_4c57u"]
+script = ExtResource("6_4c57u")
+to = "run"
+input_action = "move_left"
+action_state = 0
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_dg77c"]
+script = ExtResource("6_4c57u")
+to = "run"
+input_action = "move_right"
+action_state = 0
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_ycdy4"]
+script = ExtResource("6_4c57u")
+to = "jump"
+input_action = "jump"
+action_state = 0
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_w48qg"]
+script = ExtResource("6_4c57u")
+to = "dash"
+input_action = "dash"
+action_state = 0
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_vivmo"]
+script = ExtResource("6_4c57u")
+to = "jump"
+input_action = "jump"
+action_state = 0
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_cegan"]
+script = ExtResource("6_4c57u")
+to = "idle"
+input_action = "move_left"
+action_state = 1
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_82xsv"]
+script = ExtResource("6_4c57u")
+to = "idle"
+input_action = "move_right"
+action_state = 1
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_2cqfq"]
+script = ExtResource("6_4c57u")
+to = "dash"
+input_action = "dash"
+action_state = 0
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_yaehf"]
+script = ExtResource("6_4c57u")
+to = "dash"
+input_action = "dash"
+action_state = 0
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
+[sub_resource type="Resource" id="Resource_074og"]
+script = ExtResource("6_4c57u")
+to = "jump"
+input_action = "jump"
+action_state = 0
+metadata/_custom_type_script = "uid://cey6mrsr07fa0"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(551, 16)
 
@@ -170,22 +248,27 @@ metadata/_custom_type_script = "uid://11pw4o48jd15"
 
 [node name="idle" type="Node" parent="Player/GSM"]
 script = ExtResource("4_kek77")
+transitions = Array[ExtResource("6_4c57u")]([SubResource("Resource_efxa6"), SubResource("Resource_4c57u"), SubResource("Resource_dg77c"), SubResource("Resource_ycdy4")])
 metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
 
 [node name="run" type="Node" parent="Player/GSM"]
 script = ExtResource("5_lquwl")
+transitions = Array[ExtResource("6_4c57u")]([SubResource("Resource_w48qg"), SubResource("Resource_vivmo"), SubResource("Resource_cegan"), SubResource("Resource_82xsv")])
 metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
 
 [node name="jump" type="Node" parent="Player/GSM"]
 script = ExtResource("6_efxa6")
+transitions = Array[ExtResource("6_4c57u")]([SubResource("Resource_2cqfq")])
 metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
 
 [node name="fall" type="Node" parent="Player/GSM"]
 script = ExtResource("8_5vw27")
+transitions = Array[ExtResource("6_4c57u")]([SubResource("Resource_yaehf")])
 metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
 
 [node name="dash" type="Node" parent="Player/GSM"]
 script = ExtResource("9_kek77")
+transitions = Array[ExtResource("6_4c57u")]([SubResource("Resource_074og")])
 metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
 
 [node name="Timer" type="Timer" parent="Player/GSM/dash"]

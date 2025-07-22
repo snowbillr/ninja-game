@@ -29,9 +29,7 @@ func _physics_process(_delta: float) -> void:
 	self.player.move_and_slide()
 	
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("dash"):
-		self.gsm.transition("dash")
-	elif self.player.is_on_floor():
+	if self.player.is_on_floor():
 		if Input.get_axis("move_left", "move_right") == 0:
 			self.gsm.transition("idle")
 		else:

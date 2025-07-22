@@ -18,10 +18,9 @@ func _enter(_args: Dictionary):
 func _physics_process(_delta: float) -> void:
 	self.player.move_and_slide()
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("jump"):
-		timer.stop()
-		self.gsm.transition("jump")
+func _exit():
+	super()
+	timer.stop()
 
 func _on_timer_timeout():
 	if not self.player.is_on_floor():
