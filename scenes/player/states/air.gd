@@ -3,7 +3,7 @@ extends PlayerState
 var do_jump := false
 
 func _enter(args: Dictionary) -> void:
-	if args.has("do_jump") and args.do_jump == true:
+	if args.has("do_jump"):
 		do_jump = args.do_jump
 
 func _physics_process(_delta: float) -> void:
@@ -26,7 +26,6 @@ func _physics_process(_delta: float) -> void:
 			self.player.player_stats.friction_coefficient)
 
 	if do_jump:
-		print("jump in physics process")
 		self.player.velocity.y = -self.player.player_stats.jump_force
 		do_jump = false
 	else:

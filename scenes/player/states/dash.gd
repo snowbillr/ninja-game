@@ -3,6 +3,10 @@ extends PlayerState
 
 @onready var timer: Timer = $Timer
 
+func _ready():
+	super()
+	timer.timeout.connect(_on_timer_timeout)
+
 func _enter(_args: Dictionary):
 	self.player.animation_player.play("dash")
 
@@ -10,7 +14,6 @@ func _enter(_args: Dictionary):
 	self.player.velocity.y = 0
 	
 	timer.wait_time = self.player.player_stats.dash_duration
-	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
 
 func _physics_process(_delta: float) -> void:
