@@ -26,10 +26,10 @@ func _physics_process(_delta: float) -> void:
 		self.player.player_stats.max_gravity,
 		self.player.player_stats.gravity_coefficient)
 	
-	self.actor.move_and_slide()
+	self.player.move_and_slide()
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("dash"):
 		self.gsm.transition("dash")
-	elif self.actor.velocity.y > 0:
+	elif self.player.velocity.y > 0:
 		self.gsm.transition("fall")

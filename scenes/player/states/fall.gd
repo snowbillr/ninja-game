@@ -8,7 +8,7 @@ func _enter(_args: Dictionary):
 func _physics_process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")
 
-	if not self.actor.is_on_floor():
+	if not self.player.is_on_floor():
 		if x_input != 0:
 			self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
 			self.player.velocity.x = lerp(
@@ -26,7 +26,7 @@ func _physics_process(_delta: float) -> void:
 			self.player.player_stats.max_gravity,
 			self.player.player_stats.gravity_coefficient)
 		
-	self.actor.move_and_slide()
+	self.player.move_and_slide()
 	
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("dash"):
