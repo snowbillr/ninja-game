@@ -31,23 +31,13 @@ func transition(to: String, args: Dictionary = {}):
 	self.state.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _physics_process(delta: float) -> void:
-	for floor_check_transition in self.state.floor_check_transitions:
-		if floor_check_transition.on_floor:
-			if self.actor.is_on_floor():
-				self.transition(floor_check_transition.to)
-				return
-		elif not floor_check_transition.on_floor:
-			if not self.actor.is_on_floor():
-				self.transition(floor_check_transition.to)
-				return
+	for state_transition in self.state.transitions:
+		if state_transition is GSMFloorCheckTransition:
+			if state_transition.satisfied(self.actor):
+				self.transition(state_transition.to)
 
 func _unhandled_input(event: InputEvent) -> void:
-	for input_transition in self.state.input_transitions:
-		if input_transition.action_state == input_transition.ACTION_STATE.PRESSED:
-			if event.is_action_pressed(input_transition.input_action):
-				self.transition(input_transition.to)
-				return
-		elif input_transition.action_state == input_transition.ACTION_STATE.RELEASED:
-			if event.is_action_released(input_transition.input_action):
-				self.transition(input_transition.to)
-				return
+	for state_transition in self.state.transitions:
+		if state_transition is GSMInputTransition:
+			if state_transition.satisfied(event):
+				self.transition(state_transition.to)

@@ -1,8 +1,7 @@
 class_name GSMState
 extends Node
 
-@export var input_transitions: Array[GSMInputTransition] = []
-@export var floor_check_transitions: Array[GSMFloorCheckTransition] = []
+@export var transitions: Array[GSMTransition] = []
 
 @onready var gsm: GSM = $".."
 
