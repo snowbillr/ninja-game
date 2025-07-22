@@ -3,7 +3,6 @@ extends GSMState
 @onready var timer: Timer = $Timer
 
 func _enter(_args: Dictionary):
-	print("enter dash")
 	var stats: PlayerStats = self.gsm.actor.player_stats
 	
 	self.gsm.actor.get_node("AnimationPlayer").play("dash")

@@ -1,14 +1,14 @@
 [gd_scene load_steps=20 format=3 uid="uid://c3n6ewvf7evxl"]
 
-[ext_resource type="Script" uid="uid://5s6qntus85as" path="res://player.gd" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://player_stats.gd" id="2_272bh"]
+[ext_resource type="Script" uid="uid://5s6qntus85as" path="res://scenes/player/player.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://scenes/player/player_stats.gd" id="2_272bh"]
 [ext_resource type="Script" uid="uid://11pw4o48jd15" path="res://addons/gsm/lib/gsm.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://6jg01rlgdf7g" path="res://assets/player.png" id="4_1bvp3"]
-[ext_resource type="Script" uid="uid://cm5akp6xeg5ww" path="res://idle.gd" id="4_kek77"]
-[ext_resource type="Script" uid="uid://ds5sn6j5r6s2k" path="res://run.gd" id="5_lquwl"]
-[ext_resource type="Script" uid="uid://cwp28viqgtto6" path="res://jump.gd" id="6_efxa6"]
-[ext_resource type="Script" uid="uid://bwe28qhcv5d4f" path="res://fall.gd" id="8_5vw27"]
-[ext_resource type="Script" uid="uid://3ubtivihfehp" path="res://dash.gd" id="9_kek77"]
+[ext_resource type="Script" uid="uid://cm5akp6xeg5ww" path="res://scenes/player/states/idle.gd" id="4_kek77"]
+[ext_resource type="Script" uid="uid://ds5sn6j5r6s2k" path="res://scenes/player/states/run.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://cwp28viqgtto6" path="res://scenes/player/states/jump.gd" id="6_efxa6"]
+[ext_resource type="Script" uid="uid://bwe28qhcv5d4f" path="res://scenes/player/states/fall.gd" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://3ubtivihfehp" path="res://scenes/player/states/dash.gd" id="9_kek77"]
 
 [sub_resource type="Resource" id="Resource_5vw27"]
 script = ExtResource("2_272bh")
