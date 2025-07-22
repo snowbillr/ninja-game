@@ -11,8 +11,8 @@ func _ready():
 func _enter(args: Dictionary) -> void:
 	pass
 	
-func _check_transitions():
-	pass
+func _transition() -> Variant:
+	return null
 	
 func _exit() -> void:
 	pass

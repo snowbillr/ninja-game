@@ -8,6 +8,12 @@ var state: GSMState = null
 
 func _ready():
 	self.state = init_state
+
+func _process(_delta: float) -> void:
+	if self.state.process_mode == Node.PROCESS_MODE_INHERIT:
+		var state_name = self.state._transition()
+		if state_name != null:
+			self.transition(state_name)
 	
 func start(args: Dictionary = {}):
 	self.state._enter(args)

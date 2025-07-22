@@ -28,6 +28,8 @@ func _physics_process(_delta: float) -> void:
 	
 	self.player.move_and_slide()
 	
-func _process(_delta: float) -> void:
+func _transition() -> Variant:
 	if self.player.velocity.y > 0:
-		self.gsm.transition("fall")
+		return "fall"
+	
+	return null
