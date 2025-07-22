@@ -1,25 +1,26 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3n6ewvf7evxl"]
+[gd_scene load_steps=20 format=3 uid="uid://c3n6ewvf7evxl"]
 
 [ext_resource type="Script" uid="uid://5s6qntus85as" path="res://player.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://player_stats.gd" id="2_272bh"]
+[ext_resource type="Script" uid="uid://11pw4o48jd15" path="res://addons/gsm/lib/gsm.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://6jg01rlgdf7g" path="res://assets/player.png" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://cm5akp6xeg5ww" path="res://idle.gd" id="4_kek77"]
+[ext_resource type="Script" uid="uid://ds5sn6j5r6s2k" path="res://run.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://cwp28viqgtto6" path="res://jump.gd" id="6_efxa6"]
+[ext_resource type="Script" uid="uid://bwe28qhcv5d4f" path="res://fall.gd" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://3ubtivihfehp" path="res://dash.gd" id="9_kek77"]
 
-[sub_resource type="Animation" id="Animation_0xm2m"]
-resource_name = "idle"
-length = 0.9
-loop_mode = 1
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.142857, 0.285714, 0.428571, 0.571429, 0.714286),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(2, 0), Vector2i(1, 0)]
-}
+[sub_resource type="Resource" id="Resource_5vw27"]
+script = ExtResource("2_272bh")
+speed = 150.0
+max_gravity = 400.0
+friction_coefficient = 0.25
+acceleration_coefficient = 0.25
+gravity_coefficient = 0.03
+jump_force = 350.0
+dash_speed = 400.0
+dash_duration = 0.2
+metadata/_custom_type_script = "uid://d0va4r2v3pv32"
 
 [sub_resource type="Animation" id="Animation_h2yge"]
 length = 0.001
@@ -36,10 +37,8 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_1bvp3"]
-resource_name = "run"
-length = 0.6
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_272bh"]
+resource_name = "dash"
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -48,27 +47,10 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_lquwl"]
-resource_name = "jump"
-length = 0.1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(2, 2)]
+"values": [Vector2i(4, 12), Vector2i(5, 12), Vector2i(6, 12), Vector2i(0, 13), Vector2i(1, 13)]
 }
 
 [sub_resource type="Animation" id="Animation_7mycd"]
@@ -88,8 +70,27 @@ tracks/0/keys = {
 "values": [Vector2i(1, 3), Vector2i(2, 3)]
 }
 
-[sub_resource type="Animation" id="Animation_272bh"]
-resource_name = "dash"
+[sub_resource type="Animation" id="Animation_0xm2m"]
+resource_name = "idle"
+length = 0.9
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.142857, 0.285714, 0.428571, 0.571429, 0.714286),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(2, 0), Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lquwl"]
+resource_name = "jump"
+length = 0.1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -98,10 +99,28 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(4, 12), Vector2i(5, 12), Vector2i(6, 12), Vector2i(0, 13), Vector2i(1, 13)]
+"values": [Vector2i(2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_1bvp3"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1), Vector2i(6, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1bvp3"]
@@ -125,6 +144,7 @@ size = Vector2(551, 16)
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(198, 42)
 script = ExtResource("1_0xm2m")
+player_stats = SubResource("Resource_5vw27")
 metadata/_edit_group_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
@@ -141,6 +161,36 @@ shape = SubResource("RectangleShape2D_h2yge")
 texture = ExtResource("4_1bvp3")
 hframes = 7
 vframes = 16
+
+[node name="GSM" type="Node" parent="Player" node_paths=PackedStringArray("init_state", "actor")]
+script = ExtResource("3_h2yge")
+init_state = NodePath("idle")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://11pw4o48jd15"
+
+[node name="idle" type="Node" parent="Player/GSM"]
+script = ExtResource("4_kek77")
+metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
+
+[node name="run" type="Node" parent="Player/GSM"]
+script = ExtResource("5_lquwl")
+metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
+
+[node name="jump" type="Node" parent="Player/GSM"]
+script = ExtResource("6_efxa6")
+metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
+
+[node name="fall" type="Node" parent="Player/GSM"]
+script = ExtResource("8_5vw27")
+metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
+
+[node name="dash" type="Node" parent="Player/GSM"]
+script = ExtResource("9_kek77")
+metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
+
+[node name="Timer" type="Timer" parent="Player/GSM/dash"]
+wait_time = 2.0
+one_shot = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 68.0
