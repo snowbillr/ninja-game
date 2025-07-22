@@ -2,8 +2,6 @@ extends PlayerState
 
 
 func _enter(_args: Dictionary):
-	super(_args)
-
 	self.player.velocity.y = -self.player.player_stats.jump_force
 	self.player.animation_player.play("jump")
 

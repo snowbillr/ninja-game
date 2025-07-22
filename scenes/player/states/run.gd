@@ -2,7 +2,6 @@ extends PlayerState
 
 
 func _enter(_args: Dictionary):
-	super(_args)
 	self.player.animation_player.play("run")
 
 func _physics_process(_delta: float) -> void:

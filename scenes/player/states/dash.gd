@@ -4,8 +4,6 @@ extends PlayerState
 @onready var timer: Timer = $Timer
 
 func _enter(_args: Dictionary):
-	super(_args)
-	
 	self.player.animation_player.play("dash")
 
 	self.player.velocity.x = (1 if not self.player.sprite_2d.flip_h else -1) * self.player.player_stats.dash_speed
@@ -19,7 +17,6 @@ func _physics_process(_delta: float) -> void:
 	self.player.move_and_slide()
 
 func _exit():
-	super()
 	timer.stop()
 
 func _on_timer_timeout():

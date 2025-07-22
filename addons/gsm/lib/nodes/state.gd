@@ -7,7 +7,7 @@ extends Node
 
 ## Lifecycle
 
-func _ready():
+func _init():
 	self.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _enter(args: Dictionary) -> void:

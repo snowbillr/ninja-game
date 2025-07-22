@@ -2,7 +2,6 @@ extends PlayerState
 
 
 func _enter(_args: Dictionary) -> void:
-	super(_args)
 	self.player.animation_player.play("idle")
 
 func _process(_delta: float) -> void:
