@@ -19,7 +19,7 @@ friction_coefficient = 0.25
 acceleration_coefficient = 0.25
 gravity_coefficient = 0.03
 jump_force = 350.0
-dash_speed = 400.0
+dash_speed = 350.0
 dash_duration = 0.2
 metadata/_custom_type_script = "uid://d0va4r2v3pv32"
 
@@ -215,8 +215,6 @@ hframes = 7
 vframes = 16
 
 [node name="GSM" type="Node" parent="Player" node_paths=PackedStringArray("init_state", "actor")]
-process_priority = 1
-process_physics_priority = 1
 script = ExtResource("3_h2yge")
 init_state = NodePath("ground")
 actor = NodePath("..")

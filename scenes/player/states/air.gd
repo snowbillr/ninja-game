@@ -20,7 +20,7 @@ func _physics_process(_delta: float) -> void:
 			self.player.player_stats.speed * sign(x_input),
 			self.player.player_stats.acceleration_coefficient)
 	else:
-		self.player.velocity.x = lerp(
+		self.player.velocity.x = lerp( 
 			self.player.velocity.x,
 			0.0,
 			self.player.player_stats.friction_coefficient)

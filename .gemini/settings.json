@@ -1,8 +1,8 @@
 {
   "mcpServers": {
-    "serverName": {
+    "godot": {
       "command": "node",
-      "args": ["/Users/billreed/src/Coding-Solo/godot-mcp/build/index.js"],
+      "args": ["/Users/billreed/src/Coding-Solo/godot-mcp/build/index.js"]
     }
   }
 }

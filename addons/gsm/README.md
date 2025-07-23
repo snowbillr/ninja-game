@@ -136,6 +136,16 @@ func _transition() -> Variant:
 
 This pattern keeps your state logic clean and reduces the chance of runtime errors.
 
+## A Note on Execution Order
+
+The main `GSM` node has its `process_priority` and `process_physics_priority` set to `1`. This is a non-standard but important detail.
+
+**What it means:** The `GSM` node's `_process` and `_physics_process` functions will execute *after* the active state's `_process` and `_physics_process` functions (which have the default priority of 0).
+
+**Why it matters:** This ensures that any logic within your state script that modifies the `actor` (e.g., changing velocity, updating a timer) is completed *before* the `GSM` node checks for transitions in the same frame. This prevents a situation where a transition would be triggered before the state would execute code that would prevent that transition.
+
+For example: There is a ground check transition in an `AIR` state that transitions to the `GROUND` state. When the character first jumps, they may not leave the floor on the first frame they enter the `AIR` state, which would result in them immediately transitioning back to the `GROUND` state, if the `GSM` transition logic was run prior to the state's `_physics_process` function.
+
 ## API Reference
 
 ### GSM (Node)

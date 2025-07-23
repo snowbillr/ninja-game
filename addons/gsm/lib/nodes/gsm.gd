@@ -8,7 +8,9 @@ var state: GSMState = null
 
 func _ready():
 	self.state = init_state
-
+	self.process_priority = 1
+	self.process_physics_priority = 1
+ 
 func _process(_delta: float) -> void:
 	if self.state.process_mode == Node.PROCESS_MODE_INHERIT:
 		var transition_result = self.state._transition()
