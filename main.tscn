@@ -14,7 +14,7 @@
 
 [sub_resource type="Resource" id="Resource_5vw27"]
 script = ExtResource("2_272bh")
-speed = 150.0
+speed = 200.0
 max_gravity = 400.0
 friction_coefficient = 0.25
 acceleration_coefficient = 0.25
