@@ -14,24 +14,19 @@ func _enter(args: Dictionary) -> void:
 	else:
 		self.player.animation_player.play("fall")
 
-func _transition() -> Variant:
-	if Input.is_action_just_pressed("dash"):
-		if self.player.air_movement_charges.can_dash():
-			return "dash"
-	return null
-
-# TODO - can I just use a transition instead?
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		if self.player.air_movement_charges.can_jump():
-			self._enter({ "do_jump": true })
+			self.gsm.transition("air", { "do_jump": true})
+	elif event.is_action_pressed("dash"):
+		if self.player.air_movement_charges.can_dash():
+			return self.gsm.transition("dash")
 
 func _process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")
 
 	if x_input != 0:
 		self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
-
 
 func _physics_process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")

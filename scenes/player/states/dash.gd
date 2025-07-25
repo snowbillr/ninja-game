@@ -30,9 +30,7 @@ func _on_timer_timeout():
 		self.gsm.transition("air", { "do_jump": false })
 	else:
 		self.gsm.transition("ground")
-
-func _transition() -> Variant:
-	if Input.is_action_just_pressed("jump") and self.player.air_movement_charges.can_jump():
-		return ["air", { "do_jump": true }]
-	return null
 		
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump") and self.player.air_movement_charges.can_jump():
+		self.gsm.transition("air", { "do_jump": true })
