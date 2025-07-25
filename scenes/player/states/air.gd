@@ -20,15 +20,22 @@ func _transition() -> Variant:
 			return "dash"
 	return null
 
+# TODO - can I just use a transition instead?
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		if self.player.air_movement_charges.can_jump():
 			self._enter({ "do_jump": true })
 
+func _process(_delta: float) -> void:
+	var x_input = Input.get_axis("move_left", "move_right")
+
+	if x_input != 0:
+		self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
+
+
 func _physics_process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")
 	if x_input != 0:
-		self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
 		self.player.velocity.x = lerp(
 			self.player.velocity.x,
 			self.player.player_stats.speed * sign(x_input),
