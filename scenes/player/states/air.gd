@@ -7,7 +7,7 @@ func _enter(args: Dictionary) -> void:
 	
 	if do_jump:
 		if not self.player.is_on_floor():
-			player.air_movement_charges.jumps -= 1
+			player.air_movement_charges.consume_jump()
 			self.player.animation_player.play("double_jump")
 		else:
 			self.player.animation_player.play("jump")
@@ -16,13 +16,13 @@ func _enter(args: Dictionary) -> void:
 
 func _transition() -> Variant:
 	if Input.is_action_just_pressed("dash"):
-		if self.player.air_movement_charges.dashes > 0:
+		if self.player.air_movement_charges.can_dash():
 			return "dash"
 	return null
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
-		if self.player.air_movement_charges.jumps > 0:
+		if self.player.air_movement_charges.can_jump():
 			self._enter({ "do_jump": true })
 
 func _physics_process(_delta: float) -> void:

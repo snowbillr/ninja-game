@@ -6,11 +6,8 @@ class_name Player extends CharacterBody2D
 @onready var gsm: GSM = $GSM
 
 @export var player_stats: PlayerStats = null
+@export var air_movement_charges: AirMovementCharges = null
 
-var air_movement_charges := {
-	"jumps": 1,
-	"dashes": 1
-}
 
 func _ready() -> void:
 	gsm.start()

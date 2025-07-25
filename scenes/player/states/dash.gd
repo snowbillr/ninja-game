@@ -9,7 +9,7 @@ func _ready():
 
 func _enter(_args: Dictionary):
 	if not self.player.is_on_floor():
-		self.player.air_movement_charges.dashes -= 1
+		self.player.air_movement_charges.consume_dash()
 	
 	self.player.animation_player.play("dash")
 
@@ -32,7 +32,7 @@ func _on_timer_timeout():
 		self.gsm.transition("ground")
 
 func _transition() -> Variant:
-	if Input.is_action_just_pressed("jump") and self.player.air_movement_charges.jumps > 0:
+	if Input.is_action_just_pressed("jump") and self.player.air_movement_charges.can_jump():
 		return ["air", { "do_jump": true }]
 	return null
 		

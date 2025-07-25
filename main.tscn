@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://c3n6ewvf7evxl"]
+[gd_scene load_steps=28 format=3 uid="uid://c3n6ewvf7evxl"]
 
 [ext_resource type="Script" uid="uid://5s6qntus85as" path="res://scenes/player/player.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://scenes/player/resources/player_stats.gd" id="2_272bh"]
+[ext_resource type="Script" uid="uid://7tn5ve0xkchf" path="res://scenes/player/resources/air_movement_charges.gd" id="3_efxa6"]
 [ext_resource type="Script" uid="uid://11pw4o48jd15" path="res://addons/gsm/lib/nodes/gsm.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://6jg01rlgdf7g" path="res://assets/player.png" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://cey6mrsr07fa0" path="res://addons/gsm/lib/resources/input_transition.gd" id="6_4c57u"]
@@ -22,6 +23,12 @@ jump_force = 350.0
 dash_speed = 350.0
 dash_duration = 0.2
 metadata/_custom_type_script = "uid://d0va4r2v3pv32"
+
+[sub_resource type="Resource" id="Resource_dg77c"]
+script = ExtResource("3_efxa6")
+allowed_jumps = 1
+allowed_dashes = 1
+metadata/_custom_type_script = "uid://7tn5ve0xkchf"
 
 [sub_resource type="Animation" id="Animation_h2yge"]
 length = 0.001
@@ -199,6 +206,7 @@ size = Vector2(442.5, 16)
 position = Vector2(198, 42)
 script = ExtResource("1_0xm2m")
 player_stats = SubResource("Resource_5vw27")
+air_movement_charges = SubResource("Resource_dg77c")
 metadata/_edit_group_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
