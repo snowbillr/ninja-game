@@ -4,3 +4,4 @@ This document outlines the context required to understand the player's movement 
 
 ## Relevant Systems
 - GSM state machine: @addons/gsm/README.md
+- Player states: @assets/scenes/player/states
