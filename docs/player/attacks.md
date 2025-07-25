@@ -1,10 +1,10 @@
-# Player Attack Combos
+# Player Attack System
 
-This document outlines the context required to understand the combo system's implementation.
+This document outlines the context required to understand the player's attacks implementation.
 
 ## Relevant Systems
 - GSM state machine: @addons/gsm/README.md
-- Player States: @scenes/player/states/
+- Player movement: @docs/player/movement.md
 
 ## Attack States
 
@@ -65,11 +65,10 @@ The player can dash out of any attack at any time.
 - `DashAttack` -> `Ground`: After attack animation finishes on ground.
 - `DashAttack` -> `Air`: After attack animation finishes in air.
 
-## Implementation Steps
+## Implementation 
 
-1.  Create the new state scripts for each attack.
-2.  Add the new states to the player's state machine.
-3.  Implement the state transitions with animation-completion checks, input buffering, and combo timers.
-4.  Implement the dash interrupt for all attack states.
-5.  Implement the dash attack.
-6.  Leave placeholders for hitboxes and hurtboxes.
+Each of the states listed in the State Transitions section will have their own Node that extends `GSMState`.
+
+There will be some kind of shared implementation regarding input buffering. AITODO: Expand on this.
+
+All of the `AirAttack*` states will not have any gravity applied to them (or potentially, very very little and on each hit their y velocity will be set to a slightly negative value). AITODO: Provide options for this.
