@@ -2,6 +2,8 @@ extends PlayerState
 
 func _enter(_args: Dictionary) -> void:
 	self.player.velocity.y = 0
+	self.player.air_movement_charges.jumps = 1
+	self.player.air_movement_charges.dashes = 1
 
 func _physics_process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")

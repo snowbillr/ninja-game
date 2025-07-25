@@ -7,5 +7,10 @@ class_name Player extends CharacterBody2D
 
 @export var player_stats: PlayerStats = null
 
+var air_movement_charges := {
+	"jumps": 1,
+	"dashes": 1
+}
+
 func _ready() -> void:
 	gsm.start()

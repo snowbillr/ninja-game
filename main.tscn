@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c3n6ewvf7evxl"]
+[gd_scene load_steps=26 format=3 uid="uid://c3n6ewvf7evxl"]
 
 [ext_resource type="Script" uid="uid://5s6qntus85as" path="res://scenes/player/player.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://scenes/player/resources/player_stats.gd" id="2_272bh"]
@@ -156,24 +156,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(22, 30)
 
-[sub_resource type="Resource" id="Resource_82xsv"]
-script = ExtResource("6_4c57u")
-to = "air"
-input_action = "jump"
-action_state = 0
-args = {
-"do_jump": true
-}
-metadata/_custom_type_script = "uid://cey6mrsr07fa0"
-
-[sub_resource type="Resource" id="Resource_cegan"]
-script = ExtResource("6_4c57u")
-to = "dash"
-input_action = "dash"
-action_state = 0
-args = {}
-metadata/_custom_type_script = "uid://cey6mrsr07fa0"
-
 [sub_resource type="Resource" id="Resource_4c57u"]
 script = ExtResource("8_efxa6")
 to = "ground"
@@ -241,7 +223,6 @@ metadata/_custom_type_script = "uid://11pw4o48jd15"
 
 [node name="dash" type="Node" parent="Player/GSM"]
 script = ExtResource("9_kek77")
-transitions = Array[ExtResource("6_dg77c")]([SubResource("Resource_82xsv")])
 metadata/_custom_type_script = "uid://8qw6sjjwtvdk"
 
 [node name="Timer" type="Timer" parent="Player/GSM/dash"]
@@ -250,7 +231,7 @@ one_shot = true
 
 [node name="air" type="Node" parent="Player/GSM"]
 script = ExtResource("13_w48qg")
-transitions = Array[ExtResource("6_dg77c")]([SubResource("Resource_cegan"), SubResource("Resource_4c57u")])
+transitions = Array[ExtResource("6_dg77c")]([SubResource("Resource_4c57u")])
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"
 
 [node name="ground" type="Node" parent="Player/GSM"]

@@ -8,6 +8,9 @@ func _ready():
 	timer.timeout.connect(_on_timer_timeout)
 
 func _enter(_args: Dictionary):
+	if not self.player.is_on_floor():
+		self.player.air_movement_charges.dashes -= 1
+	
 	self.player.animation_player.play("dash")
 
 	self.player.velocity.x = (1 if not self.player.sprite_2d.flip_h else -1) * self.player.player_stats.dash_speed
@@ -27,3 +30,9 @@ func _on_timer_timeout():
 		self.gsm.transition("air", { "do_jump": false })
 	else:
 		self.gsm.transition("ground")
+
+func _transition() -> Variant:
+	if Input.is_action_just_pressed("jump") and self.player.air_movement_charges.jumps > 0:
+		return ["air", { "do_jump": true }]
+	return null
+		
