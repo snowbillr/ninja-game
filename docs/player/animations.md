@@ -23,6 +23,19 @@ The necessary animations already exist in the `AnimationPlayer` node within the 
 
 The state machine will be the heart of the `AnimationTree`. We will create states that correspond to the player's core logic states.
 
+### Core Concept: Mapping Logic to Visuals
+
+The fundamental principle of this architecture is a direct, one-to-one mapping between a **logic state** (a `GSM` node like `Ground` or `GroundAttack1`) and a **visual state** (a node in the `AnimationTree` with the exact same name).
+
+The power of this approach comes from the flexibility of the `AnimationTree`. The type of node used for the visual state is chosen based on the specific needs of that state's animation:
+
+-   For a simple state that just plays one animation (e.g., `Dash`), the visual state will be an `Animation` node.
+-   For a state that needs to blend between animations (e.g., `Ground` blending `idle` and `run`), the visual state will be a `BlendSpace1D`.
+-   For a special, one-off animation that should return to the previous state (e.g., `DoubleJump`), the visual state will be a `OneShot` node.
+-   For a state that contains its own internal animation logic (e.g., `Air` switching between `jump` and `fall`), it can be a nested `StateMachine`.
+
+This keeps the `GSM` logic clean and focused on gameplay rules, while the `AnimationTree` handles the full complexity of the visual representation.
+
 ### States:
 
 -   **Ground (Blend Space)**:
@@ -30,25 +43,41 @@ The state machine will be the heart of the `AnimationTree`. We will create state
     -   It will be an `AnimationNodeBlendSpace1D` that blends between the `idle` and `run` animations.
     -   The blend will be controlled by a parameter, `ground_speed`, which we will update from the player script.
 
--   **Air (State)**:
-    -   This state will manage jumping and falling.
-    -   We will use a `Transition` node with a condition based on the player's `velocity.y` to automatically switch between the `jump` and `fall` animations.
+-   **Air (Nested State Machine)**:
+    -   This state will manage all airborne animations (`jump`, `double_jump`, `fall`) by acting as its own nested state machine. This allows for more complex and responsive transitions.
+    -   **Sub-States:**
+        -   `Jump`: The initial upward jump animation.
+        -   `DoubleJump`: The flourish animation for the second jump.
+        -   `Fall`: The looping fall animation.
+    -   **Transitions (within Air):**
+        -   `(Entry) -> Jump`: Default state when entering `Air` from `Ground`.
+        -   `Jump -> Fall`: Transitions automatically when `velocity.y >= 0`.
+        -   `DoubleJump -> Fall`: Also transitions automatically when `velocity.y >= 0`, cutting the animation short if the player loses upward momentum.
 
 -   **Dash (Animation)**:
     -   A simple state that plays the `dash` animation.
 
--   **DoubleJump (OneShot)**:
-    -   An `AnimationNodeOneShot` that plays the `double_jump` animation.
-    -   This will be triggered from the `air.gd` script and will return to the **Air** state when finished.
+### Animation State Transitions
 
-### Transitions:
+The transitions in the `AnimationTree` state machine define the valid pathways between animation states. It's important to distinguish between transitions initiated by the game logic (`GSM`) and those handled automatically by the `AnimationTree` itself.
 
--   `(Entry) -> Ground`: The starting state.
--   `Ground -> Air`: Triggered when the player jumps or walks off a ledge.
--   `Air -> Ground`: Triggered when the player lands on a solid surface.
--   `Any -> Dash`: Triggered when the player initiates a dash. This allows dashing from both the `Ground` and `Air` states.
--   `Dash -> Air`: Triggered when the player jumps to interrupt a dash.
--   `Dash -> Air/Ground`: After the dash duration is over, the state machine will automatically transition to the `Air` or `Ground` animation state based on whether the player is on the floor.
+#### `GSM`-Driven Transitions
+
+These transitions occur when the player's logic state changes, forcing the `AnimationTree` to follow suit via the `travel()` command. The connections must exist in the editor for the `travel()` call to succeed.
+
+-   **`(Entry) -> Ground`**: The default starting state for the player.
+-   **`Ground <-> Air`**: The `GSM` dictates when the player is airborne or grounded.
+-   **`Any -> Dash`**: The `GSM` can initiate a dash from any state, interrupting the current animation.
+-   **`Dash -> Air`**: A dash can be interrupted by a jump, which is a `GSM`-driven state change.
+-   **`Air -> Air/DoubleJump`**: The `GSM` explicitly tells the `AnimationTree` to travel to the `DoubleJump` sub-state when the action is performed.
+
+#### `AnimationTree`-Internal Transitions
+
+These transitions are configured in the `AnimationTree` editor and run automatically based on conditions or timers, without further input from the `GSM`. This is where the `AnimationTree`'s power to manage complex animation flow shines.
+
+-   **`Dash -> Air/Ground` (Auto)**: After the `dash` animation finishes, the transition can be configured to automatically move to either the `Air` or `Ground` state based on a condition (e.g., `is_on_floor()`).
+-   **`Jump -> Fall` (Conditional)**: Inside the `Air` nested state machine, a transition from `Jump` to `Fall` will trigger automatically when the condition `velocity.y >= 0` is met.
+-   **`DoubleJump -> Fall` (Conditional)**: Similarly, the `DoubleJump` animation will be cut short and transition to `Fall` as soon as the player's upward momentum ceases (`velocity.y >= 0`).
 
 ## 4. Update Player State Scripts
 
@@ -74,7 +103,11 @@ func _enter(_args: Dictionary) -> void:
 With the automatic travel logic in the base class, the individual state scripts are now dramatically simplified. They no longer need to contain any boilerplate for playing animations. They only need to handle logic specific to that state.
 
 -   **`ground.gd`**: The `_enter` function can be removed if it only contained the `travel()` call. Note that the animation state in the `AnimationTree` must be named "Ground" to match the `ground.gd` scene's root node name.
--   **`air.gd`**: The `_enter` function is still needed to handle the `do_jump` argument, but the `travel("Air")` call is removed. It will still need to trigger the `double_jump` OneShot, as this is a special case.
+-   **`air.gd`**: The `_enter` function is still needed to handle the `do_jump` argument, but the base class handles the initial `travel("Air")`. When a double jump is performed, it will need to specifically travel to the `DoubleJump` sub-state:
+    ```gdscript
+    # In air.gd, when a double jump is performed:
+    animation_tree.get("parameters/playback").travel("Air/DoubleJump")
+    ```
 -   **`dash.gd`**: The `_enter` function can be removed if it only contained the `travel()` call.
 
 ### `player.gd`
@@ -93,8 +126,7 @@ This approach eliminates the manual `travel()` calls, reduces code duplication, 
 1.  **Modify `player_state.gd`**: Add the automatic `travel()` logic to the `_enter` function in the base state script (`scenes/player/player_state.gd`) as described above.
 2.  **Confirm Animations**: Check that the existing animations in the `AnimationPlayer` are suitable for the new system.
 3.  **Add `AnimationTree`**: Add and configure the `AnimationTree` and its `StateMachine` in `player.tscn`.
-4.  **Create Animation States**: Create the `Ground` blend space, `Air` state, and `Dash` state. **Crucially, ensure the names of these animation states exactly match the names of the corresponding logic state nodes** (e.g., "Ground", "Air", "Dash").
-5.  **Implement `DoubleJump`**: Implement the `DoubleJump` `OneShot` node for the special flourish animation.
-6.  **Refactor `player.gd`**: Update the main player script to continuously set the shared `AnimationTree` parameters for blend spaces and conditions.
-7.  **Refactor State Scripts**: Remove the now-redundant manual `travel()` calls from the `_enter` functions of `ground.gd`, `air.gd`, and `dash.gd`.
-8.  **Test**: Test all movement and actions to ensure animations are playing and transitioning correctly based on the new convention-based system.
+4.  **Create Animation States**: Create the `Ground` blend space and `Dash` animation state. For the `Air` state, create a **Nested State Machine** containing the `Jump`, `DoubleJump`, and `Fall` animation states and their transitions. **Crucially, ensure the names of these animation states exactly match the names of the corresponding logic state nodes** (e.g., "Ground", "Air", "Dash").
+5.  **Refactor `player.gd`**: Update the main player script to continuously set the shared `AnimationTree` parameters for blend spaces and conditions.
+6.  **Refactor State Scripts**: Remove the now-redundant manual `travel()` calls from the `_enter` functions of `ground.gd`, `air.gd`, and `dash.gd`, and add the specific `travel("Air/DoubleJump")` call for the double jump action.
+7.  **Test**: Test all movement and actions to ensure animations are playing and transitioning correctly based on the new convention-based system.
