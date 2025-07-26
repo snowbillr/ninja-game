@@ -14,12 +14,13 @@
 
 [sub_resource type="Resource" id="Resource_5vw27"]
 script = ExtResource("2_272bh")
-speed = 200.0
+max_speed = 200.0
 max_gravity = 400.0
 friction_coefficient = 0.25
 acceleration_coefficient = 0.25
 gravity_coefficient = 0.03
-jump_force = 350.0
+big_jump_force = 325.0
+little_jump_force = 250.0
 dash_speed = 350.0
 dash_duration = 0.2
 metadata/_custom_type_script = "uid://d0va4r2v3pv32"
@@ -241,6 +242,10 @@ one_shot = true
 script = ExtResource("13_w48qg")
 transitions = Array[ExtResource("6_dg77c")]([SubResource("Resource_4c57u")])
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"
+
+[node name="BigJumpTimer" type="Timer" parent="Player/GSM/air"]
+wait_time = 0.05
+one_shot = true
 
 [node name="ground" type="Node" parent="Player/GSM"]
 script = ExtResource("14_vivmo")

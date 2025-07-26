@@ -19,7 +19,7 @@ func _physics_process(_delta: float) -> void:
 	if x_input != 0:
 		self.player.velocity.x = lerp(
 			self.player.velocity.x,
-			self.player.player_stats.speed * sign(x_input),
+			self.player.player_stats.max_speed * x_input,
 			self.player.player_stats.acceleration_coefficient)
 	else:
 		self.player.velocity.x = lerp(
