@@ -1,13 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://c3n6ewvf7evxl"]
+[gd_scene load_steps=22 format=3 uid="uid://c3n6ewvf7evxl"]
 
 [ext_resource type="Script" uid="uid://5s6qntus85as" path="res://scenes/player/player.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://scenes/player/resources/player_stats.gd" id="2_272bh"]
 [ext_resource type="Script" uid="uid://7tn5ve0xkchf" path="res://scenes/player/resources/air_movement_charges.gd" id="3_efxa6"]
 [ext_resource type="Script" uid="uid://11pw4o48jd15" path="res://addons/gsm/lib/nodes/gsm.gd" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://6jg01rlgdf7g" path="res://assets/player.png" id="4_1bvp3"]
-[ext_resource type="Script" uid="uid://cey6mrsr07fa0" path="res://addons/gsm/lib/resources/input_transition.gd" id="6_4c57u"]
-[ext_resource type="Script" uid="uid://brx0boggxevhy" path="res://addons/gsm/lib/resources/transition.gd" id="6_dg77c"]
-[ext_resource type="Script" uid="uid://d1tsplojbwan" path="res://addons/gsm/lib/resources/floor_check_transition.gd" id="8_efxa6"]
 [ext_resource type="Script" uid="uid://3ubtivihfehp" path="res://scenes/player/states/dash.gd" id="9_kek77"]
 [ext_resource type="Script" uid="uid://bwen0e8opp2n" path="res://scenes/player/states/air.gd" id="13_w48qg"]
 [ext_resource type="Script" uid="uid://drbhygpus2dkb" path="res://scenes/player/states/ground.gd" id="14_vivmo"]
@@ -164,42 +161,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(22, 30)
 
-[sub_resource type="Resource" id="Resource_4c57u"]
-script = ExtResource("8_efxa6")
-to = "ground"
-on_floor = true
-args = {}
-metadata/_custom_type_script = "uid://d1tsplojbwan"
-
-[sub_resource type="Resource" id="Resource_getpj"]
-script = ExtResource("8_efxa6")
-to = "air"
-on_floor = false
-args = {
-"do_jump": false
-}
-metadata/_custom_type_script = "uid://d1tsplojbwan"
-
-[sub_resource type="Resource" id="Resource_w48qg"]
-script = ExtResource("6_4c57u")
-to = "air"
-input_action = "jump"
-action_state = 0
-args = {
-"do_jump": true
-}
-metadata/_custom_type_script = "uid://cey6mrsr07fa0"
-
-[sub_resource type="Resource" id="Resource_vivmo"]
-script = ExtResource("6_4c57u")
-to = "dash"
-input_action = "dash"
-action_state = 0
-args = {}
-metadata/_custom_type_script = "uid://cey6mrsr07fa0"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(442.5, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efxa6"]
 
 [node name="World" type="Node2D"]
 
@@ -240,7 +205,6 @@ one_shot = true
 
 [node name="air" type="Node" parent="Player/GSM"]
 script = ExtResource("13_w48qg")
-transitions = Array[ExtResource("6_dg77c")]([SubResource("Resource_4c57u")])
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"
 
 [node name="BigJumpTimer" type="Timer" parent="Player/GSM/air"]
@@ -249,7 +213,6 @@ one_shot = true
 
 [node name="ground" type="Node" parent="Player/GSM"]
 script = ExtResource("14_vivmo")
-transitions = Array[ExtResource("6_dg77c")]([SubResource("Resource_getpj"), SubResource("Resource_w48qg"), SubResource("Resource_vivmo")])
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -340,3 +303,6 @@ position = Vector2(-361, 84)
 scale = Vector2(4.45, 0.16)
 color = Color(0.125911, 0.125911, 0.125911, 1)
 polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_efxa6")

@@ -14,6 +14,22 @@ func _process(_delta: float) -> void:
 		self.player.animation_player.play("idle")
 
 func _physics_process(_delta: float) -> void:
+	self._apply_horizontal_movement()
+
+	self.player.move_and_slide()
+	
+	if not self.player.is_on_floor():
+		self.gsm.transition("air")
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump"):
+		self.gsm.transition("air", { "do_jump": true })
+	elif event.is_action_pressed("dash"):
+		self.gsm.transition("dash")
+
+## private
+
+func _apply_horizontal_movement():
 	var x_input = Input.get_axis("move_left", "move_right")
 
 	if x_input != 0:
@@ -26,5 +42,3 @@ func _physics_process(_delta: float) -> void:
 			self.player.velocity.x,
 			0.0,
 			self.player.player_stats.friction_coefficient)
-
-	self.player.move_and_slide()
