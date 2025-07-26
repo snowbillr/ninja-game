@@ -2,3 +2,4 @@
 - [x] controller connection
 - [ ] attack states
 - [ ] enemy
+- [ ] wall hang/slide
