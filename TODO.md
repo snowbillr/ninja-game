@@ -1,5 +1,14 @@
-- [ ] tilemap
+# Input
 - [x] controller connection
+
+# World
+- [ ] tilemap
+
+# Movement
+- [ ] wall hang/slide
+
+# Attacks
 - [ ] attack states
 - [ ] enemy
-- [ ] wall hang/slide
+- [ ] hitboxes
+- [ ] hurtboxes
