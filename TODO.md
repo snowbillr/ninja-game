@@ -1,4 +1,4 @@
 - [ ] tilemap
-- [ ] controller connection
+- [x] controller connection
 - [ ] attack states
 - [ ] enemy
