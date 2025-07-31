@@ -2,7 +2,7 @@
 
 This project is a 2D platformer built with Godot 4.
 
-When beginning a task, always read @project.godot to understand the project's settings and input map.
+When beginning a task, always read @project.godot to understand the project's settings and input map. If there are relevant files in the @docs/ folder for your task, read them too.
 
 ## Core Mechanics
 
