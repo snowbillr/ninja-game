@@ -10,17 +10,13 @@ func _ready() -> void:
 	big_jump_timer.timeout.connect(self._do_big_jump)
 
 func _enter(args: Dictionary) -> void:
+	super(args)
 	do_jump = args.get("do_jump", false)
 	
 	if do_jump:
 		big_jump_timer.start()
 		if not self.player.is_on_floor():
 			player.air_movement_charges.consume_jump()
-			self.player.animation_player.play("double_jump")
-		else:
-			self.player.animation_player.play("jump")
-	else:
-		self.player.animation_player.play("fall")
 
 func _exit() -> void:
 	big_jump_timer.stop()
@@ -52,8 +48,6 @@ func _physics_process(_delta: float) -> void:
 		
 	self.player.move_and_slide()
 
-	if self.player.velocity.y > 0:
-		self.player.animation_player.play("fall")
 
 	if self.player.is_on_floor():
 		self.gsm.transition("ground")

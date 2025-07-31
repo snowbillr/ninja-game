@@ -1,6 +1,7 @@
 extends PlayerState
 
 func _enter(_args: Dictionary) -> void:
+	super(_args)
 	self.player.velocity.y = 0
 	self.player.air_movement_charges.reset()
 	
@@ -8,15 +9,14 @@ func _process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")
 
 	if x_input != 0:
-		self.player.animation_player.play("run")
 		self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
-	else:
-		self.player.animation_player.play("idle")
 
 func _physics_process(_delta: float) -> void:
 	self._apply_horizontal_movement()
 
 	self.player.move_and_slide()
+	
+	self.animation_tree.set("parameters/ground/blend_position", abs(self.player.velocity.x))
 	
 	if not self.player.is_on_floor():
 		self.gsm.transition("air")
