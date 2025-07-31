@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 		self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
 
 func _physics_process(_delta: float) -> void:
-	self._apply_horizontal_movement()
+	self.player._apply_horizontal_movement()
 
 	self.player.move_and_slide()
 	
@@ -26,19 +26,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.gsm.transition("air", { "do_jump": true })
 	elif event.is_action_pressed("dash"):
 		self.gsm.transition("dash")
-
-## private
-
-func _apply_horizontal_movement():
-	var x_input = Input.get_axis("move_left", "move_right")
-
-	if x_input != 0:
-		self.player.velocity.x = lerp(
-			self.player.velocity.x,
-			self.player.player_stats.max_speed * x_input,
-			self.player.player_stats.acceleration_coefficient)
-	else:
-		self.player.velocity.x = lerp(
-			self.player.velocity.x,
-			0.0,
-			self.player.player_stats.friction_coefficient)
