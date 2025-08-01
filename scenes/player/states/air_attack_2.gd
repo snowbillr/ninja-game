@@ -7,6 +7,7 @@ func _ready() -> void:
 func _enter(_args: Dictionary):
 	super(_args)
 	self.player.animation_tree.animation_finished.connect(self._on_animation_finished)
+	self.player.velocity.y = 0
 
 func _exit():
 	self.player.animation_tree.animation_finished.disconnect(self._on_animation_finished)
