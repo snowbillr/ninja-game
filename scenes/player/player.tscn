@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bm6sw4xs55fmh"]
+[gd_scene load_steps=59 format=3 uid="uid://bm6sw4xs55fmh"]
 
 [ext_resource type="Script" uid="uid://5s6qntus85as" path="res://scenes/player/player.gd" id="1_qek5x"]
 [ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://scenes/player/resources/player_stats.gd" id="2_5gtgg"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" uid="uid://3ubtivihfehp" path="res://scenes/player/states/dash.gd" id="6_gx1jg"]
 [ext_resource type="Script" uid="uid://bwen0e8opp2n" path="res://scenes/player/states/air.gd" id="7_ugbui"]
 [ext_resource type="Script" uid="uid://drbhygpus2dkb" path="res://scenes/player/states/ground.gd" id="8_fcs02"]
+[ext_resource type="Script" uid="uid://bmaeld5v0d6nv" path="res://scenes/player/ground_attack_1.gd" id="9_je7p5"]
+[ext_resource type="Script" uid="uid://nwmaqcja0neo" path="res://scenes/player/ground_attack_2.gd" id="10_fm80t"]
+[ext_resource type="Script" uid="uid://bm0xadl2vqtdr" path="res://scenes/player/ground_attack_up.gd" id="11_gx1jg"]
 
 [sub_resource type="Resource" id="Resource_5vw27"]
 script = ExtResource("2_5gtgg")
@@ -95,6 +98,15 @@ max_space = 10.0
 snap = 1.0
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fcs02"]
+animation = &"ground_attack_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_myrg7"]
+animation = &"ground_attack_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kvlxm"]
+animation = &"ground_attack_up"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ugbui"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcs02"]
@@ -110,6 +122,20 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ydkj"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j4nxn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_28m0y"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uniwh"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iqsei"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tffgl"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pk8ii"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5mf0n"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3j4b4"]
 states/End/position = Vector2(896, 250)
 states/Start/position = Vector2(196, 250)
@@ -119,8 +145,14 @@ states/dash/node = SubResource("AnimationNodeAnimation_5gtgg")
 states/dash/position = Vector2(544, 417.5)
 states/ground/node = SubResource("AnimationNodeBlendSpace1D_gx1jg")
 states/ground/position = Vector2(425, 179.484)
-transitions = ["ground", "dash", SubResource("AnimationNodeStateMachineTransition_ugbui"), "ground", "air", SubResource("AnimationNodeStateMachineTransition_fcs02"), "air", "ground", SubResource("AnimationNodeStateMachineTransition_myrg7"), "air", "dash", SubResource("AnimationNodeStateMachineTransition_kvlxm"), "dash", "ground", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "dash", "air", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "Start", "ground", SubResource("AnimationNodeStateMachineTransition_8ydkj")]
-graph_offset = Vector2(-85.22, 135.957)
+states/ground_attack_1/node = SubResource("AnimationNodeAnimation_fcs02")
+states/ground_attack_1/position = Vector2(162.56, -73.4025)
+states/ground_attack_2/node = SubResource("AnimationNodeAnimation_myrg7")
+states/ground_attack_2/position = Vector2(414.28, 0.0974693)
+states/ground_attack_up/node = SubResource("AnimationNodeAnimation_kvlxm")
+states/ground_attack_up/position = Vector2(623.03, -74.1213)
+transitions = ["ground", "dash", SubResource("AnimationNodeStateMachineTransition_ugbui"), "ground", "air", SubResource("AnimationNodeStateMachineTransition_fcs02"), "air", "ground", SubResource("AnimationNodeStateMachineTransition_myrg7"), "air", "dash", SubResource("AnimationNodeStateMachineTransition_kvlxm"), "dash", "ground", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "dash", "air", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "Start", "ground", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "ground", "ground_attack_1", SubResource("AnimationNodeStateMachineTransition_j4nxn"), "ground_attack_1", "ground_attack_up", SubResource("AnimationNodeStateMachineTransition_28m0y"), "ground_attack_1", "ground_attack_2", SubResource("AnimationNodeStateMachineTransition_uniwh"), "ground_attack_1", "ground", SubResource("AnimationNodeStateMachineTransition_iqsei"), "ground_attack_up", "ground", SubResource("AnimationNodeStateMachineTransition_tffgl"), "ground_attack_2", "ground", SubResource("AnimationNodeStateMachineTransition_pk8ii"), "ground", "ground_attack_up", SubResource("AnimationNodeStateMachineTransition_5mf0n")]
+graph_offset = Vector2(-202.1, -131.793)
 
 [sub_resource type="Animation" id="Animation_h2yge"]
 length = 0.001
@@ -188,6 +220,57 @@ tracks/0/keys = {
 "values": [Vector2i(1, 3), Vector2i(2, 3)]
 }
 
+[sub_resource type="Animation" id="Animation_qek5x"]
+resource_name = "ground_attack_1"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0142857, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(6, 6), Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_5gtgg"]
+resource_name = "ground_attack_2"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(4, 7), Vector2i(5, 7), Vector2i(6, 7), Vector2i(0, 8), Vector2i(1, 8), Vector2i(2, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_h17s1"]
+resource_name = "ground_attack_up"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6), Vector2i(4, 6), Vector2i(5, 6)]
+}
+
 [sub_resource type="Animation" id="Animation_0xm2m"]
 resource_name = "idle"
 length = 0.6
@@ -247,6 +330,9 @@ _data = {
 &"dash": SubResource("Animation_272bh"),
 &"double_jump": SubResource("Animation_4c57u"),
 &"fall": SubResource("Animation_7mycd"),
+&"ground_attack_1": SubResource("Animation_qek5x"),
+&"ground_attack_2": SubResource("Animation_5gtgg"),
+&"ground_attack_up": SubResource("Animation_h17s1"),
 &"idle": SubResource("Animation_0xm2m"),
 &"jump": SubResource("Animation_lquwl"),
 &"run": SubResource("Animation_1bvp3")
@@ -305,4 +391,16 @@ one_shot = true
 
 [node name="ground" type="Node" parent="GSM"]
 script = ExtResource("8_fcs02")
+metadata/_custom_type_script = "uid://d3bokcxy5twsd"
+
+[node name="ground_attack_1" type="Node" parent="GSM"]
+script = ExtResource("9_je7p5")
+metadata/_custom_type_script = "uid://d3bokcxy5twsd"
+
+[node name="ground_attack_2" type="Node" parent="GSM"]
+script = ExtResource("10_fm80t")
+metadata/_custom_type_script = "uid://d3bokcxy5twsd"
+
+[node name="ground_attack_up" type="Node" parent="GSM"]
+script = ExtResource("11_gx1jg")
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"

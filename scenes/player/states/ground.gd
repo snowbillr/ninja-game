@@ -16,7 +16,7 @@ func _physics_process(_delta: float) -> void:
 
 	self.player.move_and_slide()
 	
-	self.animation_tree.set("parameters/ground/blend_position", abs(self.player.velocity.x))
+	self.player.animation_tree.set("parameters/ground/blend_position", abs(self.player.velocity.x))
 	
 	if not self.player.is_on_floor():
 		self.gsm.transition("air")
@@ -26,3 +26,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.gsm.transition("air", { "do_jump": true })
 	elif event.is_action_pressed("dash"):
 		self.gsm.transition("dash")
+	elif event.is_action_pressed("attack"):
+		if Input.is_action_pressed("up"):
+			self.gsm.transition("ground_attack_up")
+		else:
+			self.gsm.transition("ground_attack_1")
