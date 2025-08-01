@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://bm6sw4xs55fmh"]
+[gd_scene load_steps=76 format=3 uid="uid://bm6sw4xs55fmh"]
 
 [ext_resource type="Script" uid="uid://5s6qntus85as" path="res://scenes/player/player.gd" id="1_qek5x"]
 [ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://scenes/player/resources/player_stats.gd" id="2_5gtgg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bmaeld5v0d6nv" path="res://scenes/player/states/ground_attack_1.gd" id="9_je7p5"]
 [ext_resource type="Script" uid="uid://nwmaqcja0neo" path="res://scenes/player/states/ground_attack_2.gd" id="10_fm80t"]
 [ext_resource type="Script" uid="uid://bm0xadl2vqtdr" path="res://scenes/player/states/ground_attack_up.gd" id="11_gx1jg"]
+[ext_resource type="Script" uid="uid://d3bokcxy5twsd" path="res://scenes/player/player_state.gd" id="12_fm80t"]
 [ext_resource type="Script" uid="uid://6mq330nlvc82" path="res://scenes/player/states/air_attack_1.gd" id="12_ugbui"]
 [ext_resource type="Script" uid="uid://c6jginbdxr82p" path="res://scenes/player/states/air_attack_2.gd" id="13_fcs02"]
 [ext_resource type="Script" uid="uid://b71i15kuclt2w" path="res://scenes/player/states/air_attack_down.gd" id="14_myrg7"]
@@ -184,7 +185,7 @@ states/ground_attack_2/position = Vector2(414.28, 0.0974693)
 states/ground_attack_up/node = SubResource("AnimationNodeAnimation_kvlxm")
 states/ground_attack_up/position = Vector2(623.03, -74.1213)
 transitions = ["ground", "dash", SubResource("AnimationNodeStateMachineTransition_ugbui"), "ground", "air", SubResource("AnimationNodeStateMachineTransition_fcs02"), "air", "ground", SubResource("AnimationNodeStateMachineTransition_myrg7"), "air", "dash", SubResource("AnimationNodeStateMachineTransition_kvlxm"), "dash", "ground", SubResource("AnimationNodeStateMachineTransition_uf5tr"), "dash", "air", SubResource("AnimationNodeStateMachineTransition_lgqa7"), "Start", "ground", SubResource("AnimationNodeStateMachineTransition_8ydkj"), "ground", "ground_attack_1", SubResource("AnimationNodeStateMachineTransition_j4nxn"), "ground_attack_1", "ground_attack_up", SubResource("AnimationNodeStateMachineTransition_28m0y"), "ground_attack_1", "ground_attack_2", SubResource("AnimationNodeStateMachineTransition_uniwh"), "ground_attack_1", "ground", SubResource("AnimationNodeStateMachineTransition_iqsei"), "ground_attack_up", "ground", SubResource("AnimationNodeStateMachineTransition_tffgl"), "ground_attack_2", "ground", SubResource("AnimationNodeStateMachineTransition_pk8ii"), "ground", "ground_attack_up", SubResource("AnimationNodeStateMachineTransition_5mf0n"), "air", "air_attack_1", SubResource("AnimationNodeStateMachineTransition_4hvnv"), "air", "air_attack_down", SubResource("AnimationNodeStateMachineTransition_bbmj2"), "air_attack_1", "air_attack_2", SubResource("AnimationNodeStateMachineTransition_kxw46"), "air_attack_1", "air_attack_down", SubResource("AnimationNodeStateMachineTransition_8qxvo"), "air_attack_1", "air", SubResource("AnimationNodeStateMachineTransition_5q8fn"), "air_attack_2", "air", SubResource("AnimationNodeStateMachineTransition_wva7c"), "air_attack_down", "air", SubResource("AnimationNodeStateMachineTransition_7obkq")]
-graph_offset = Vector2(283.51, -183.686)
+graph_offset = Vector2(35.1405, -166.391)
 
 [sub_resource type="Animation" id="Animation_h2yge"]
 length = 0.001
@@ -501,4 +502,8 @@ metadata/_custom_type_script = "uid://d3bokcxy5twsd"
 
 [node name="air_attack_down" type="Node" parent="GSM"]
 script = ExtResource("14_myrg7")
+metadata/_custom_type_script = "uid://d3bokcxy5twsd"
+
+[node name="PlayerState" type="Node" parent="GSM"]
+script = ExtResource("12_fm80t")
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"

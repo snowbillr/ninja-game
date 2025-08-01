@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AttackData" load_steps=2 format=3 uid="uid://d1ici5ae0cvu0"]
+
+[ext_resource type="Script" uid="uid://cj2ushn6vm86h" path="res://scenes/player/resources/attack_data.gd" id="1_ga3sk"]
+
+[resource]
+script = ExtResource("1_ga3sk")
+animation_name = "ground_attack_1"
+metadata/_custom_type_script = "uid://cj2ushn6vm86h"
