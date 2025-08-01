@@ -30,6 +30,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("dash"):
 		if self.player.air_movement_charges.can_dash():
 			self.gsm.transition("dash")
+	elif event.is_action_pressed("attack"):
+		if Input.is_action_pressed("down"):
+			self.gsm.transition("air_attack_down")
+		else:
+			self.gsm.transition("air_attack_1")
 
 func _process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")
