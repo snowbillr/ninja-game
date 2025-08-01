@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3n6ewvf7evxl"]
+[gd_scene load_steps=4 format=3 uid="uid://c3n6ewvf7evxl"]
 
 [ext_resource type="PackedScene" uid="uid://bm6sw4xs55fmh" path="res://scenes/player/player.tscn" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://6jg01rlgdf7g" path="res://assets/player.png" id="4_1bvp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(442.5, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_efxa6"]
 
 [node name="World" type="Node2D"]
 
@@ -101,6 +99,3 @@ position = Vector2(-361, 84)
 scale = Vector2(4.45, 0.16)
 color = Color(0.125911, 0.125911, 0.125911, 1)
 polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_efxa6")
