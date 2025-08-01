@@ -13,8 +13,7 @@ class_name Player extends CharacterBody2D
 func _ready() -> void:
 	gsm.start()
 
-func _apply_horizontal_movement() -> void:
-	var x_input = Input.get_axis("move_left", "move_right")
+func _apply_horizontal_movement(x_input: float = 0.0) -> void:
 	if x_input != 0:
 		self.velocity.x = lerp(
 			self.velocity.x,

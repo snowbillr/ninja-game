@@ -10,7 +10,7 @@ func _ready() -> void:
 	big_jump_timer.timeout.connect(self._do_big_jump)
 
 func _enter(args: Dictionary) -> void:
-	super(args)
+	super (args)
 	do_jump = args.get("do_jump", false)
 	
 	if do_jump:
@@ -43,7 +43,7 @@ func _process(_delta: float) -> void:
 		self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
 
 func _physics_process(_delta: float) -> void:
-	self.player._apply_horizontal_movement()
+	self.player._apply_horizontal_movement(Input.get_axis("move_left", "move_right"))
 
 	if do_jump:
 		self.player.velocity.y = - self.player.player_stats.little_jump_force

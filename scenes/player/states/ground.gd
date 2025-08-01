@@ -1,7 +1,7 @@
 extends PlayerState
 
 func _enter(_args: Dictionary) -> void:
-	super(_args)
+	super (_args)
 	self.player.velocity.y = 0
 	self.player.air_movement_charges.reset()
 	
@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 		self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
 
 func _physics_process(_delta: float) -> void:
-	self.player._apply_horizontal_movement()
+	self.player._apply_horizontal_movement(Input.get_axis("move_left", "move_right"))
 
 	self.player.move_and_slide()
 	
@@ -23,7 +23,7 @@ func _physics_process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
-		self.gsm.transition("air", { "do_jump": true })
+		self.gsm.transition("air", {"do_jump": true})
 	elif event.is_action_pressed("dash"):
 		self.gsm.transition("dash")
 	elif event.is_action_pressed("attack"):

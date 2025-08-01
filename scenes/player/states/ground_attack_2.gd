@@ -3,6 +3,9 @@ extends PlayerState
 
 func _ready() -> void:
 	super()
+	
+func _physics_process(_delta: float) -> void:
+	self.player._apply_horizontal_movement()
 
 func _enter(_args: Dictionary):
 	super(_args)
