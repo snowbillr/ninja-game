@@ -99,3 +99,18 @@ position = Vector2(-361, 84)
 scale = Vector2(4.45, 0.16)
 color = Color(0.125911, 0.125911, 0.125911, 1)
 polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(484, 53)
+rotation = 1.5708
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-138.25, 92)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Polygon2D" type="Polygon2D" parent="Wall"]
+position = Vector2(-361, 84)
+scale = Vector2(4.45, 0.16)
+color = Color(0.125911, 0.125911, 0.125911, 1)
+polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
