@@ -29,13 +29,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.queue_next_attack = true
 		
 func _on_animation_finished(_animation_name: String):
-	if (self.queue_next_attack):
+	var next_attack = null
+
+	if self.queue_next_attack:
 		if Input.is_action_pressed("up") and combo_attack.next_up_attack != null:
-			self.gsm.transition(self.name, {"combo_attack": combo_attack.next_up_attack})
+			next_attack = combo_attack.next_up_attack
 		elif Input.is_action_pressed("down") and combo_attack.next_down_attack != null:
-			self.gsm.transition(self.name, {"combo_attack": combo_attack.next_down_attack})
+			next_attack = combo_attack.next_down_attack
 		elif combo_attack.next_attack != null:
-			self.gsm.transition(self.name, {"combo_attack": combo_attack.next_attack})
+			next_attack = combo_attack.next_attack
+
+	if self.queue_next_attack && next_attack != null:
+		self.gsm.transition(self.name, {"combo_attack": next_attack})
 	else:
 		var target_state = "ground" if self.player.is_on_floor() else "air"
 		self.gsm.transition(target_state)
