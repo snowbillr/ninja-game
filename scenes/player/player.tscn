@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bm6sw4xs55fmh"]
+[gd_scene load_steps=52 format=3 uid="uid://bm6sw4xs55fmh"]
 
 [ext_resource type="Script" uid="uid://5s6qntus85as" path="res://scenes/player/player.gd" id="1_qek5x"]
 [ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://scenes/player/resources/player_stats.gd" id="2_5gtgg"]
@@ -10,9 +10,6 @@
 [ext_resource type="Script" uid="uid://drbhygpus2dkb" path="res://scenes/player/states/ground.gd" id="8_fcs02"]
 [ext_resource type="Resource" uid="uid://7d2040tlv8fr" path="res://scenes/player/moveset/combos/air_starter.tres" id="8_ugbui"]
 [ext_resource type="Resource" uid="uid://co70ruwjio3q" path="res://scenes/player/moveset/combos/ground_starter.tres" id="9_myrg7"]
-[ext_resource type="Script" uid="uid://6mq330nlvc82" path="res://scenes/player/states/air_attack_1.gd" id="12_ugbui"]
-[ext_resource type="Script" uid="uid://c6jginbdxr82p" path="res://scenes/player/states/air_attack_2.gd" id="13_fcs02"]
-[ext_resource type="Script" uid="uid://b71i15kuclt2w" path="res://scenes/player/states/air_attack_down.gd" id="14_myrg7"]
 [ext_resource type="Script" uid="uid://bywphxhi7ugvg" path="res://scenes/player/states/attack.gd" id="15_fcs02"]
 
 [sub_resource type="Resource" id="Resource_5vw27"]
@@ -421,18 +418,6 @@ one_shot = true
 [node name="ground" type="Node" parent="GSM"]
 script = ExtResource("8_fcs02")
 attack_starter = ExtResource("9_myrg7")
-metadata/_custom_type_script = "uid://d3bokcxy5twsd"
-
-[node name="air_attack_1" type="Node" parent="GSM"]
-script = ExtResource("12_ugbui")
-metadata/_custom_type_script = "uid://d3bokcxy5twsd"
-
-[node name="air_attack_2" type="Node" parent="GSM"]
-script = ExtResource("13_fcs02")
-metadata/_custom_type_script = "uid://d3bokcxy5twsd"
-
-[node name="air_attack_down" type="Node" parent="GSM"]
-script = ExtResource("14_myrg7")
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"
 
 [node name="attack" type="Node" parent="GSM"]

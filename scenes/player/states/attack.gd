@@ -7,6 +7,10 @@ var queue_next_attack := false
 
 func _ready():
 	self.player = self.gsm.actor
+	
+func _physics_process(_delta: float) -> void:
+	self.player.velocity.x = lerp(self.player.velocity.x, 0.0, self.player.player_stats.friction_coefficient)
+	self.player.velocity.y = lerp(self.player.velocity.y, 0.0, self.player.player_stats.friction_coefficient)
 
 # args has the ComboAttack in it as "combo_attack"
 func _enter(args: Dictionary):
