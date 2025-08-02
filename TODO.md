@@ -8,7 +8,7 @@
 - [ ] wall hang/slide
 
 # Attacks
-- [ ] attack states
+- [x] attack states
 - [ ] enemy
 - [ ] hitboxes
 - [ ] hurtboxes
