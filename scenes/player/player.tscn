@@ -411,6 +411,10 @@ script = ExtResource("7_ugbui")
 attack_starter = ExtResource("8_ugbui")
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"
 
+[node name="AttackCooldownTimer" type="Timer" parent="GSM/air"]
+wait_time = 0.3
+one_shot = true
+
 [node name="BigJumpTimer" type="Timer" parent="GSM/air"]
 wait_time = 0.05
 one_shot = true
@@ -419,6 +423,10 @@ one_shot = true
 script = ExtResource("8_fcs02")
 attack_starter = ExtResource("9_myrg7")
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"
+
+[node name="AttackCooldownTimer" type="Timer" parent="GSM/ground"]
+wait_time = 0.3
+one_shot = true
 
 [node name="attack" type="Node" parent="GSM"]
 script = ExtResource("15_fcs02")

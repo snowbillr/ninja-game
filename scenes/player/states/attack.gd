@@ -43,4 +43,4 @@ func _on_animation_finished(_animation_name: String):
 		self.gsm.transition(self.name, {"combo_attack": next_attack})
 	else:
 		var target_state = "ground" if self.player.is_on_floor() else "air"
-		self.gsm.transition(target_state)
+		self.gsm.transition(target_state, { "start_attack_cooldown": true })

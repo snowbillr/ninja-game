@@ -2,10 +2,20 @@ extends PlayerState
 
 @export var attack_starter: ComboAttack = null
 
-func _enter(_args: Dictionary) -> void:
-	super (_args)
+@onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
+
+# _args
+#   start_attack_cooldown: bool
+func _enter(args: Dictionary) -> void:
+	super (args)
 	self.player.velocity.y = 0
 	self.player.air_movement_charges.reset()
+	
+	if args.get("start_attack_cooldown", false):
+		attack_cooldown_timer.start()
+	
+func _exit():
+	self.attack_cooldown_timer.stop()
 	
 func _process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")
@@ -28,7 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.gsm.transition("air", {"do_jump": true})
 	elif event.is_action_pressed("dash"):
 		self.gsm.transition("dash")
-	elif event.is_action_pressed("attack"):
+	elif event.is_action_pressed("attack") && self.attack_cooldown_timer.is_stopped():
 		if Input.is_action_pressed("up"):
 			self.gsm.transition("attack", { "combo_attack": attack_starter.next_up_attack })
 		else:
