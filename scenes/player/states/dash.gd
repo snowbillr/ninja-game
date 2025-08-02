@@ -1,5 +1,6 @@
 extends MovementState
 
+@export var attack_starter: ComboAttack
 
 @onready var timer: Timer = $Timer
 
@@ -34,3 +35,5 @@ func _on_timer_timeout():
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and self.player.air_movement_charges.can_jump():
 		self.gsm.transition("air", {"do_jump": true})
+	elif event.is_action_pressed("attack"):
+		self.gsm.transition("attack", {"combo_attack": attack_starter.next_attack})
