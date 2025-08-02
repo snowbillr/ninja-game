@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ComboAttack" load_steps=3 format=3 uid="uid://dvxlhlfhkx31w"]
+
+[ext_resource type="Script" uid="uid://cm12346c5380q" path="res://scenes/player/resources/combo_attack.gd" id="1_ie3bb"]
+[ext_resource type="Resource" uid="uid://cqikyylecdwmj" path="res://scenes/player/moveset/attacks/air_attack_down.tres" id="1_m6yv8"]
+
+[resource]
+script = ExtResource("1_ie3bb")
+attack = ExtResource("1_m6yv8")
+metadata/_custom_type_script = "uid://cm12346c5380q"

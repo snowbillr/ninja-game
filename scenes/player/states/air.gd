@@ -1,6 +1,7 @@
 extends PlayerState
 
 @onready var big_jump_timer: Timer = $BigJumpTimer
+@export var attack_starter: ComboAttack = null
 
 var do_jump := false
 var did_short_jump = false
@@ -32,9 +33,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			self.gsm.transition("dash")
 	elif event.is_action_pressed("attack"):
 		if Input.is_action_pressed("down"):
-			self.gsm.transition("air_attack_down")
+			self.gsm.transition("attack", { "combo_attack": attack_starter.next_down_attack })
 		else:
-			self.gsm.transition("air_attack_1")
+			self.gsm.transition("attack", { "combo_attack": attack_starter.next_attack })
 
 func _process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")
