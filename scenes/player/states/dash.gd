@@ -1,14 +1,14 @@
-extends PlayerState
+extends MovementState
 
 
 @onready var timer: Timer = $Timer
 
 func _ready():
-	super()
+	super ()
 	timer.timeout.connect(_on_timer_timeout)
 
 func _enter(_args: Dictionary):
-	super(_args)
+	super (_args)
 	if not self.player.is_on_floor():
 		self.player.air_movement_charges.consume_dash()
 	
@@ -27,10 +27,10 @@ func _exit():
 
 func _on_timer_timeout():
 	if not self.player.is_on_floor():
-		self.gsm.transition("air", { "do_jump": false })
+		self.gsm.transition("air", {"do_jump": false})
 	else:
 		self.gsm.transition("ground")
 		
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and self.player.air_movement_charges.can_jump():
-		self.gsm.transition("air", { "do_jump": true })
+		self.gsm.transition("air", {"do_jump": true})

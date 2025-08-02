@@ -1,4 +1,4 @@
-extends PlayerState
+extends MovementState
 
 @export var attack_starter: ComboAttack = null
 
@@ -40,6 +40,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.gsm.transition("dash")
 	elif event.is_action_pressed("attack") && self.attack_cooldown_timer.is_stopped():
 		if Input.is_action_pressed("up"):
-			self.gsm.transition("attack", { "combo_attack": attack_starter.next_up_attack })
+			self.gsm.transition("attack", {"combo_attack": attack_starter.next_up_attack})
 		else:
-			self.gsm.transition("attack", { "combo_attack": attack_starter.next_attack })
+			self.gsm.transition("attack", {"combo_attack": attack_starter.next_attack})

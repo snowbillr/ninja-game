@@ -83,14 +83,14 @@ These transitions are configured in the `AnimationTree` editor and run automatic
 
 To keep the logic (`GSM`) and visual (`AnimationTree`) states in sync without manual effort, we will adopt a "convention over configuration" approach. The name of the logic state node (e.g., `Ground`) will directly map to the name of the animation state in the `AnimationTree`.
 
-This is achieved by adding a small snippet to the base `PlayerState` script.
+This is achieved by adding a small snippet to the base `MovementState` script.
 
 ### `scenes/player/player_state.gd`
 
 The base state script will be modified to automatically tell the `AnimationTree` to travel to the corresponding state upon entry.
 
 ```gdscript
-class_name PlayerState
+class_name MovementState
 extends GSMState
 
 # Automatically travel to the animation state that has the SAME NAME as this logic state node.

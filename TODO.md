@@ -15,4 +15,4 @@
 - [ ] hurtboxes
 
 # Refactors
-- [ ] PlayerState -> MovementState
+- [x] PlayerState -> MovementState

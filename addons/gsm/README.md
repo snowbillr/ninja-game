@@ -104,24 +104,24 @@ This script will extend `GSMState` and get a typed reference to your actor.
 
 ```gdscript
 # player_state.gd
-class_name PlayerState extends GSMState
+class_name MovementState extends GSMState
 
 # Create a typed variable for your actor.
 var player: Player = null
 
 func _ready():
 	# Assign the actor to the typed variable.
-	# Now, any script that extends PlayerState will have a `player` property.
+	# Now, any script that extends MovementState will have a `player` property.
 	self.player = self.gsm.actor
 ```
 
 **2. Inherit from your base state:**
 
-Now, make your individual state scripts (like `Idle`, `Run`, etc.) extend your new `PlayerState` instead of `GSMState`.
+Now, make your individual state scripts (like `Idle`, `Run`, etc.) extend your new `MovementState` instead of `GSMState`.
 
 ```gdscript
 # idle.gd
-extends PlayerState # <-- Inherit from your base state
+extends MovementState # <-- Inherit from your base state
 
 func _enter(_args: Dictionary) -> void:
 	# You can now access your actor's properties and methods

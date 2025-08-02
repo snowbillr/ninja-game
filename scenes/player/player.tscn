@@ -422,6 +422,7 @@ one_shot = true
 [node name="ground" type="Node" parent="GSM"]
 script = ExtResource("8_fcs02")
 attack_starter = ExtResource("9_myrg7")
+transitions = null
 metadata/_custom_type_script = "uid://d3bokcxy5twsd"
 
 [node name="AttackCooldownTimer" type="Timer" parent="GSM/ground"]

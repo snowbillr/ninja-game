@@ -1,5 +1,5 @@
-#          MovementState
-class_name PlayerState extends GSMState
+# @abstract (Godot 4.5.x)
+class_name MovementState extends GSMState
 
 
 var player: Player = null
