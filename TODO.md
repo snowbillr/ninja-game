@@ -9,7 +9,7 @@
 
 # Attacks
 - [x] attack states
-- [ ] dash attack
+- [x] dash attack
 - [ ] enemy
 - [ ] hitboxes
 - [ ] hurtboxes
