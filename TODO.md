@@ -9,6 +9,10 @@
 
 # Attacks
 - [x] attack states
+- [ ] dash attack
 - [ ] enemy
 - [ ] hitboxes
 - [ ] hurtboxes
+
+# Refactors
+- [ ] PlayerState -> MovementState
