@@ -53,13 +53,13 @@ func _process(_delta: float) -> void:
 		self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
 
 func _physics_process(_delta: float) -> void:
-	self.player._apply_horizontal_movement(Input.get_axis("move_left", "move_right"))
+	self._apply_horizontal_movement(Input.get_axis("move_left", "move_right"))
 
 	if do_jump:
 		self.player.velocity.y = - self.player.player_stats.little_jump_force
 		do_jump = false
 	else:
-		self.player._apply_gravity()
+		self._apply_gravity()
 		
 	self.player.move_and_slide()
 
