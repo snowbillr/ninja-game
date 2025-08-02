@@ -31,21 +31,6 @@ func _exit() -> void:
 	self.big_jump_timer.stop()
 	self.attack_cooldown_timer.stop()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_released("jump"):
-		big_jump_timer.stop()
-	elif event.is_action_pressed("jump"):
-		if self.player.air_movement_charges.can_jump():
-			self.gsm.transition("air", {"do_jump": true})
-	elif event.is_action_pressed("dash"):
-		if self.player.air_movement_charges.can_dash():
-			self.gsm.transition("dash")
-	elif event.is_action_pressed("attack") && self.attack_cooldown_timer.is_stopped():
-		if Input.is_action_pressed("down"):
-			self.gsm.transition("attack", {"combo_attack": attack_starter.next_down_attack})
-		else:
-			self.gsm.transition("attack", {"combo_attack": attack_starter.next_attack})
-
 func _process(_delta: float) -> void:
 	var x_input = Input.get_axis("move_left", "move_right")
 
@@ -63,9 +48,24 @@ func _physics_process(_delta: float) -> void:
 		
 	self.player.move_and_slide()
 
-
 	if self.player.is_on_floor():
 		self.gsm.transition("ground")
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_released("jump"):
+		big_jump_timer.stop()
+	elif event.is_action_pressed("jump"):
+		if self.player.air_movement_charges.can_jump():
+			self.gsm.transition("air", {"do_jump": true})
+	elif event.is_action_pressed("dash"):
+		if self.player.air_movement_charges.can_dash():
+			self.gsm.transition("dash")
+	elif event.is_action_pressed("attack") && self.attack_cooldown_timer.is_stopped():
+		if Input.is_action_pressed("down"):
+			self.gsm.transition("attack", {"combo_attack": attack_starter.next_down_attack})
+		else:
+			self.gsm.transition("attack", {"combo_attack": attack_starter.next_attack})
+
 
 ## private
 
