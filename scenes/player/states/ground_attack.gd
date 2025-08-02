@@ -12,7 +12,6 @@ func _ready():
 func _enter(args: Dictionary):
 	queue_next_attack = false
 	combo_attack = args["combo_attack"]
-	print(self.combo_attack.attack.animation_name)
 	self.player.animation_tree.set_active(false)
 	self.player.animation_player.animation_finished.connect(self._on_animation_finished)
 	
@@ -28,10 +27,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_animation_finished(_animation_name: String):
 	if (self.queue_next_attack):
 		if Input.is_action_pressed("up") and combo_attack.next_up_attack != null:
-			self.gsm.transition("ground_attack", { "combo_attack": combo_attack.next_up_attack })
+			self.gsm.transition(self.name, {"combo_attack": combo_attack.next_up_attack})
 		elif Input.is_action_pressed("down") and combo_attack.next_down_attack != null:
-			self.gsm.transition("ground_attack", { "combo_attack": combo_attack.next_down_attack })
+			self.gsm.transition(self.name, {"combo_attack": combo_attack.next_down_attack})
 		elif combo_attack.next_attack != null:
-			self.gsm.transition("ground_attack", { "combo_attack": combo_attack.next_attack })
+			self.gsm.transition(self.name, {"combo_attack": combo_attack.next_attack})
 	else:
 		self.gsm.transition("ground")
