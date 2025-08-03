@@ -13,6 +13,7 @@
 
 # Attacks
 - [x] attack states
+  - [ ] only float if attacks connect? otherwise just fall?
 - [x] dash attack
 - [ ] enemy
 - [ ] hitboxes
