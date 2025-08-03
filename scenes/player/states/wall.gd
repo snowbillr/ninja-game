@@ -1,8 +1,6 @@
 extends MovementState
 
 
-var falling := false
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super ()
@@ -10,7 +8,6 @@ func _ready() -> void:
 
 func _enter(_args: Dictionary) -> void:
 	super (_args)
-	self.falling = false
 	self.player.velocity.y = 0
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -19,13 +16,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("jump"):
 		self.player.velocity.x += self.player.player_stats.wall_exit_velocity * self.player.direction * -1
 		self.gsm.transition("air", { "do_jump": true })
-	else:
-		self.falling = event.is_action_pressed("down")
 
 func _physics_process(_delta: float) -> void:
 	if self.player.is_on_floor():
 		self.gsm.transition("ground")
-	if falling:
+	elif Input.is_action_pressed("down"):
 		self._apply_gravity()
 	else:
 		self.player.velocity.y = lerp(self.player.velocity.y, 0.0, self.player.player_stats.friction_coefficient)
