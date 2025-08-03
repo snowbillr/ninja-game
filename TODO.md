@@ -6,8 +6,10 @@
 
 # Movement
 - [x] wall hang/slide
-  - [ ] fix hang to the left - offset from wall
+  - [x] fix hang to the left - offset from wall
   - [ ] fix hang below and above edge of wall
+- [ ] update collision shape for each animation
+  - as necessary
 
 # Attacks
 - [x] attack states

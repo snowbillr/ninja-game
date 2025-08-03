@@ -19,4 +19,8 @@ func _ready() -> void:
 
 func _update_direction(new_direction: DirectionDetector.DIRECTION):
 	self.direction = new_direction
-	self.sprite_2d.flip_h = true if new_direction == DirectionDetector.DIRECTION.LEFT else false
+
+	# We always flip the X value of the scale when a new direction is set.
+	# Note: Experimentation proved this method call is functionally equivalent to setting the self.scale.x directly.
+	#       It seemed easier to understand to use the apply_scale method.
+	self.apply_scale(Vector2(-1, 1))
