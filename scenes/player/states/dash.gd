@@ -23,6 +23,9 @@ func _enter(args: Dictionary):
 	timer.start()
 
 func _physics_process(_delta: float) -> void:
+	if self.player.is_on_wall():
+		self.gsm.transition("wall")
+
 	self.player.move_and_slide()
 
 func _exit():
