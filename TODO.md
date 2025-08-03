@@ -5,7 +5,7 @@
 - [ ] tilemap
 
 # Movement
-- [ ] wall hang/slide
+- [x] wall hang/slide
 
 # Attacks
 - [x] attack states
@@ -16,4 +16,4 @@
 
 # Refactors
 - [x] PlayerState -> MovementState
-- [ ] DirectionDetector node (detect facing left or right)
+- [x] DirectionDetector node (detect facing left or right)
