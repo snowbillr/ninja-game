@@ -101,7 +101,7 @@ color = Color(0.125911, 0.125911, 0.125911, 1)
 polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
 
 [node name="Wall" type="StaticBody2D" parent="."]
-position = Vector2(484, 53)
+position = Vector2(484, 94)
 rotation = 1.5708
 metadata/_edit_group_ = true
 

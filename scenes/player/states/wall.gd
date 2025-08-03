@@ -23,6 +23,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		self.falling = event.is_action_pressed("down")
 
 func _physics_process(_delta: float) -> void:
+	if self.player.is_on_floor():
+		self.gsm.transition("ground")
 	if falling:
 		self._apply_gravity()
 	else:
