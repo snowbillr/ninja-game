@@ -16,3 +16,4 @@
 
 # Refactors
 - [x] PlayerState -> MovementState
+- [ ] DirectionDetector node (detect facing left or right)

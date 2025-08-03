@@ -17,12 +17,6 @@ func _enter(args: Dictionary) -> void:
 func _exit():
 	self.attack_cooldown_timer.stop()
 	
-func _process(_delta: float) -> void:
-	var x_input = Input.get_axis("move_left", "move_right")
-
-	if x_input != 0:
-		self.player.sprite_2d.flip_h = true if sign(x_input) == -1 else false
-
 func _physics_process(_delta: float) -> void:
 	self._apply_horizontal_movement(Input.get_axis("move_left", "move_right"))
 

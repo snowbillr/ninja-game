@@ -10,3 +10,4 @@ extends Resource
 @export var little_jump_force: float = 250.0
 @export var dash_speed: float = 350.0
 @export var dash_duration: float = 0.2
+@export var wall_exit_velocity: float = 500.0
