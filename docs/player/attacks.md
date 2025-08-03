@@ -3,8 +3,10 @@
 This document outlines the context required to understand the player's attacks implementation.
 
 ## Relevant Systems
+- Player: @docs/player/player.md
 - GSM state machine: @addons/gsm/README.md
 - Player movement: @docs/player/movement.md
+- Player animations: @docs/player/animations.md
 
 ## Attack States
 
@@ -65,10 +67,19 @@ The player can dash out of any attack at any time.
 - `DashAttack` -> `Ground`: After attack animation finishes on ground.
 - `DashAttack` -> `Air`: After attack animation finishes in air.
 
-## Implementation 
+## Implementation
 
-Each of the states listed in the State Transitions section will have their own Node that extends `GSMState`.
+Each of the states listed in the State Transitions section will have its own Node that extends `GSMState`.
 
-There will be some kind of shared implementation regarding input buffering. AITODO: Expand on this.
+### Input Buffering
+To create a fluid combo system, attack inputs are buffered.
 
-All of the `AirAttack*` states will not have any gravity applied to them (or potentially, very very little and on each hit their y velocity will be set to a slightly negative value). AITODO: Provide options for this.
+- Whan an attack state is active, it will buffer the next attack if the attack button is pressed.
+- When the current attack animation ends, it checks for a valid follow-up action (e.g., `attack`, `up` + `attack`).
+- If a valid input and related ComboAttack is detected, the state machine immediately transitions to the corresponding next attack state. This makes combos feel responsive, as the player can input the next move before the current one has finished.
+
+### Air Attack Gravity
+To give air combos a sense of "floatiness" and control, gravity is handled differently during air attacks.
+
+- Upon entering any `attack` state, the player's `velocity.y` is set to 0.
+- No gravity is applied in the `attack` state.

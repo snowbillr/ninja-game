@@ -3,8 +3,9 @@
 This document outlines the context required to understand the player's movement implementation.
 
 ## Relevant Systems
+- Player: @docs/player/player.md
 - GSM state machine: @addons/gsm/README.md
-- Player states: @assets/scenes/player/states
+- Player states: @scenes/player/states
 
 ## State-Based Movement
 
@@ -43,3 +44,11 @@ To limit the player's abilities in the air, the concept of "air movement charges
 - **Jumps**: The player starts with a set number of air jumps (e.g., one double jump). Each time they jump in the air, a charge is consumed.
 - **Dashes**: Similarly, the player has a limited number of air dashes. A charge is only consumed if the dash is performed in the air.
 - **Reset**: All air movement charges are reset when the player returns to the `ground` state.
+
+- **`wall`**: This state is active when the player is sliding against a wall.
+  - **Wall Slide**: When the player is against a wall in the air, their downward velocity is clamped to a maximum slide speed, preventing them from falling too quickly.
+  - **Wall Jump**: Pressing the "jump" button while in this state will perform a wall jump, propelling the player up and away from the wall. This consumes an air jump charge.
+  - **Actions / Transitions**:
+    - **Jump**: Transitions to the `air` state to perform the wall jump.
+    - **Fall**: If the player moves away from the wall, they will transition back to the `air` state and fall normally.
+    - **Land**: If the player slides all the way down the wall to the floor, they will transition to the `ground` state.
