@@ -8,7 +8,7 @@ signal direction_changed(direction: DIRECTION)
 
 var direction := DIRECTION.RIGHT
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var previous_direction := direction
 	
 	if target.velocity.x < 0:
