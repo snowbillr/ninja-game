@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5s6qntus85as" path="res://scenes/player/player.gd" id="1_qek5x"]
 [ext_resource type="Script" uid="uid://d0va4r2v3pv32" path="res://scenes/player/resources/player_stats.gd" id="2_5gtgg"]
 [ext_resource type="Script" uid="uid://7tn5ve0xkchf" path="res://scenes/player/resources/air_movement_charges.gd" id="3_h17s1"]
-[ext_resource type="Texture2D" uid="uid://6jg01rlgdf7g" path="res://assets/player.png" id="4_je7p5"]
+[ext_resource type="Texture2D" uid="uid://6jg01rlgdf7g" path="res://assets/player/player.png" id="4_je7p5"]
 [ext_resource type="Script" uid="uid://11pw4o48jd15" path="res://addons/gsm/lib/nodes/gsm.gd" id="5_fm80t"]
 [ext_resource type="Script" uid="uid://3ubtivihfehp" path="res://scenes/player/states/dash.gd" id="6_gx1jg"]
 [ext_resource type="Resource" uid="uid://c3vx5xywf8hcq" path="res://scenes/player/moveset/combos/dash_starter.tres" id="7_fm80t"]
