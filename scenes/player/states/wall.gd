@@ -11,7 +11,7 @@ func _enter(_args: Dictionary) -> void:
 	self.player.velocity.y = 0
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("dash"):
+	if event.is_action_pressed("dash") and self.player.air_movement_charges.can_dash():
 		self.gsm.transition("dash", {"direction": self.player.direction * -1})
 	elif event.is_action_pressed("jump"):
 		self.player.velocity.x += self.player.player_stats.wall_exit_velocity * self.player.direction * -1

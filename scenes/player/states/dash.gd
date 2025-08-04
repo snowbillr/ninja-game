@@ -24,7 +24,8 @@ func _enter(args: Dictionary):
 
 func _physics_process(_delta: float) -> void:
 	if self.player.is_on_wall():
-		self.gsm.transition("wall")
+		if (sign(self.player.get_wall_normal().x) == self.player.direction):
+			self.gsm.transition("wall")
 
 	self.player.move_and_slide()
 
